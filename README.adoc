@@ -1,0 +1,32 @@
+= `arc` - APPUiO Registry Cleaner
+
+Removes unused stuff from the OpenShift Docker Registry storage.
+
+**What is unused stuff?**
+
+- Repositories that have neither manifest revisions nor layers
+- Repositories that have no manifest revision referenced by OpenShift
+
+**Related projects**
+
+* https://docs.openshift.com/container-platform/3.11/admin_guide/pruning_resources.html#pruning-images[OpenShift image pruner]
+
+
+== Development
+
+=== Ensure proper dependencies
+
+For OpenShift 3.11:
+
+```sh
+go get github.com/openshift/api@release-3.11
+go get k8s.io/api@kubernetes-1.11.1
+go get k8s.io/apimachinery@kubernetes-1.11.1
+go get k8s.io/client-go@kubernetes-1.11.1
+```
+
+https://github.com/openshift/client-go/blob/release-3.11/glide.yaml[Source]
+
+== Reference
+
+* https://github.com/docker/distribution/blob/master/registry/storage/paths.go[Docker Registry Storage layout]
