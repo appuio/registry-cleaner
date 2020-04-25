@@ -8,10 +8,6 @@ import (
 	"github.com/appuio/arc"
 )
 
-const (
-	root = "/docker/registry/v2"
-)
-
 func main() {
 	if err := run(); err != nil {
 		log.Fatalln(err)
