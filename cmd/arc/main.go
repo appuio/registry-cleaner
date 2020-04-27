@@ -46,11 +46,13 @@ func run() error {
 			}
 		}
 
-		if !hasMatch {
-			log.Printf("Found no manifest revision for '%s' in OpenShift, deleting!", name)
-			if err := reg.DeleteRepo(name); err != nil {
-				log.Fatalln("Error deleting Repo:", err)
-			}
+		if hasMatch {
+			continue
+		}
+
+		log.Printf("Found no manifest revision for '%s' in OpenShift, deleting!", name)
+		if err := reg.DeleteRepo(name); err != nil {
+			log.Fatalln("Error deleting Repo:", err)
 		}
 	}
 
@@ -65,8 +67,12 @@ func must(v interface{}, err error) interface{} {
 }
 
 func getOpenShiftClient() *arc.OpenShiftClient {
-	home := must(os.UserHomeDir()).(string)
-	kubeconfig := filepath.Join(home, ".kube", "config")
+	kubeconfig := os.Getenv("ARC_KUBECONFIG_PATH")
+	if kubeconfig == "" {
+		home := must(os.UserHomeDir()).(string)
+		kubeconfig = filepath.Join(home, ".kube", "config")
+	}
+	log.Println("Using kubeconfig at", kubeconfig)
 
 	osc := must(arc.NewOpenShiftClient(kubeconfig)).(*arc.OpenShiftClient)
 
