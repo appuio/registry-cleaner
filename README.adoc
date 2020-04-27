@@ -2,14 +2,20 @@
 
 Removes unused stuff from the OpenShift Docker Registry storage.
 
-**What is unused stuff?**
-
-- Repositories that have neither manifest revisions nor layers
-- Repositories that have no manifest revision referenced by OpenShift
-
 **Related projects**
 
-* https://docs.openshift.com/container-platform/3.11/admin_guide/pruning_resources.html#pruning-images[OpenShift image pruner]
+- https://github.com/appuio/seiso/[APPUiO Seiso]
+- https://docs.openshift.com/container-platform/3.11/admin_guide/pruning_resources.html#pruning-images[OpenShift image pruner]
+
+
+== Usage
+
+    usage: arc [command]
+
+    commands:
+      uploads: Delete repos that have uploads but no manifests or layers
+      repos:   Delete repositories that are not known to OpenShift
+      blobs:   Delete orphaned blobs
 
 
 == Development
@@ -27,6 +33,7 @@ go get k8s.io/client-go@kubernetes-1.11.1
 
 https://github.com/openshift/client-go/blob/release-3.11/glide.yaml[Source]
 
-== Reference
+== References
 
-* https://github.com/docker/distribution/blob/master/registry/storage/paths.go[Docker Registry Storage layout]
+- https://github.com/docker/distribution/blob/master/registry/storage/paths.go[Docker Registry Storage layout]
+- https://wiki.vshn.net/display/APPU/Docker+Registry+Storage[Related research]
