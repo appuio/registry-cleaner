@@ -12,6 +12,10 @@ const (
 	repoRoot = root + "/repositories"
 )
 
+var (
+	metadataComponents = []string{"_manifests", "_layers", "_uploads"}
+)
+
 // RegistryClient interacts with the docker registry storage
 type RegistryClient struct {
 	storage driver.StorageDriver
@@ -40,5 +44,17 @@ func NewRegistryClientS3(accessKey, secretKey, endpoint, bucket string) (*Regist
 // DeleteRepo deletes the given repository metadata, but NOT its associated
 /// BLOBs
 func (r RegistryClient) DeleteRepo(name string) error {
-	return r.storage.Delete(context.Background(), repoRoot+"/"+name)
+	ctx := context.Background()
+
+	for _, part := range metadataComponents {
+		path := repoRoot + "/" + name + "/" + part
+		if err := r.storage.Delete(ctx, path); err != nil {
+			if _, ok := err.(driver.PathNotFoundError); ok {
+				continue
+			}
+			return err
+		}
+	}
+
+	return nil
 }
