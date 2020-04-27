@@ -14,8 +14,6 @@ require (
 	github.com/imdario/mergo v0.3.9 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
-	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
-	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/openshift/api v0.0.0-20200312145924-779a333deb13 // indirect
 	github.com/openshift/client-go v0.0.0-20180830153425-431ec9a26e50
 	github.com/sirupsen/logrus v1.5.0 // indirect
