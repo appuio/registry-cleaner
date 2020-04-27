@@ -37,3 +37,8 @@ https://github.com/openshift/client-go/blob/release-3.11/glide.yaml[Source]
 
 - https://github.com/docker/distribution/blob/master/registry/storage/paths.go[Docker Registry Storage layout]
 - https://wiki.vshn.net/display/APPU/Docker+Registry+Storage[Related research]
+
+
+== License
+
+BSD-3-Clause, see `LICENSE`
